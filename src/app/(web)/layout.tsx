@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-
+import { PostHogProvider } from '@/lib/providers'
 // These styles apply to every route in the application
 import '@/styles/globals.css'
 import { Noto_Serif, Noto_Sans } from 'next/font/google'
+import SuspendedPostHogPageView from '@/lib/PostHogPageView'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -29,7 +30,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${notoSans.variable} ${notoSerif.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <PostHogProvider>
+          <SuspendedPostHogPageView />
+          {children}
+        </PostHogProvider>
+      </body>
     </html>
   )
 }
