@@ -69,9 +69,8 @@ export function ScatterHistoryChart({ data }: { data: PerformanceData[] }) {
           dataKey="season_start"
           name="Season Start"
           allowDecimals={false}
-          // tickCount={
-          //   data.length > 10 ? Math.ceil(data.length / 10) : data.length
-          // }
+          tickCount={8}
+          interval={0}
           domain={["dataMin", "dataMax"]}
         />
         <YAxis
