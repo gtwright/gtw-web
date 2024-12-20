@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import { ScatterHistoryChart } from "@/components/beethoven/ScatterHistoryChart";
 import { ConductorComponent } from "@/components/beethoven/ConductorComponent";
 import { fetchPerformances } from "@/actions/fetch"
+import type { Metadata } from 'next'
+
 export default async function Page(props: {
   searchParams?: Promise<{ conductor?: string }>;
 }) {
@@ -23,4 +25,12 @@ export default async function Page(props: {
 
     </div>
   )
+}
+
+export const metadata: Metadata = {
+  title: 'Beethoven Symphonies',
+  description: "The BSO and Beethoven Symphonies",
+  openGraph: {
+    images: '/beethoven-symph.png',
+  },
 }
