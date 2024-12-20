@@ -72,3 +72,35 @@ export const fetchPerformances = async (conductor: string): Promise<PerformanceR
   }
 }
 }
+
+export async function fetchConductors(): Promise<ConductorResult> {
+    const payload = await getPayload({ config: configPromise })
+    try {
+      const result = await payload.db.drizzle
+      // @ts-expect-error Schema type mismatch
+        .select({ conductor: beethoven.conductor })
+        // @ts-expect-error Schema type mismatch
+        .from(beethoven)
+        // @ts-expect-error Schema type mismatch
+        .groupBy(beethoven.conductor)
+        // @ts-expect-error Schema type mismatch
+        .orderBy(beethoven.conductor);
+  
+      return { success: true, data: result.map((item) => item.conductor) as string[] };
+    } catch (error) {
+      console.error("Database query error:", error);
+      return { success: false, error: "Failed to fetch conductors" };
+    }
+  }
+
+  type ConductorResult =
+    | {
+        success: true;
+        data: string[];
+      }
+    | {
+        success: false;
+        error: string;
+      };
+
+  
