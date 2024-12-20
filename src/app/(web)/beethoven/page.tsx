@@ -30,4 +30,7 @@ export default async function Page(props: {
 export const metadata: Metadata = {
   title: 'Beethoven Symphonies',
   description: "The BSO and Beethoven Symphonies",
+  openGraph: {
+    images: '/beethoven-symph.png',
+  },
 }
