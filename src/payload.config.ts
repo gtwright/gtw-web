@@ -6,10 +6,9 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-
+import { beethoven } from './lib/schema'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -27,9 +26,18 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: vercelPostgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URL || '',
-    },
+    beforeSchemaInit: [
+      // @ts-expect-error Schema type mismatch
+      ({ schema }) => {
+        return {
+          ...schema,
+          tables: {
+            ...schema.tables,
+            beethoven: beethoven,
+          },
+        }
+      },
+    ],
   }),
   sharp,
   plugins: [

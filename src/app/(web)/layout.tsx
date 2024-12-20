@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { PostHogProvider } from '@/lib/providers'
+import { PostHogProvider } from '@/lib/providers/providers'
 // These styles apply to every route in the application
 import '@/styles/globals.css'
 import { Noto_Serif, Noto_Sans } from 'next/font/google'
-import SuspendedPostHogPageView from '@/lib/PostHogPageView'
+import SuspendedPostHogPageView from '@/lib/providers/PostHogPageView'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
