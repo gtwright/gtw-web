@@ -20,6 +20,7 @@
     "@payloadcms/payload-cloud": "latest",
     "@payloadcms/richtext-lexical": "latest",
     "cross-env": "^7.0.3",
+    "drizzle-orm": "^0.38.2",
     "google": "link:next/font/google",
     "graphql": "^16.8.1",
     "next": "15.1.0",
