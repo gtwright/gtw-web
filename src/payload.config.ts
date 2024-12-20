@@ -26,11 +26,7 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: vercelPostgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URL || '',
-    },
-  }),
+  db: vercelPostgresAdapter(),
   sharp,
   plugins: [
     payloadCloudPlugin(),
