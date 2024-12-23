@@ -1,7 +1,6 @@
 import { Suspense } from "react";
-import { ScatterHistoryChart } from "@/components/beethoven/ScatterHistoryChart";
+import { ScatterHistoryComponent } from "@/components/beethoven/ScatterHistoryComponent";
 import { ConductorComponent } from "@/components/beethoven/ConductorComponent";
-import { fetchPerformances } from "@/actions/fetch"
 import type { Metadata } from 'next'
 
 export default async function Page(props: {
@@ -9,7 +8,6 @@ export default async function Page(props: {
 }) {
   const searchParams = await props.searchParams;
   const conductor = searchParams?.conductor || "";
-  const performances = await fetchPerformances(conductor);
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-3xl font-bold py-4">The BSO and Beethoven Symphonies</h1>
@@ -20,7 +18,7 @@ export default async function Page(props: {
         </Suspense>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <ScatterHistoryChart data={performances.success ? performances.data : []} />
+        <ScatterHistoryComponent conductor={conductor} />
       </Suspense>
 
     </div>
