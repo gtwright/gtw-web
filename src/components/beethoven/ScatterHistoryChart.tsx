@@ -18,7 +18,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { stringToColor } from "@/lib/utils";
-import { Performance } from "@/lib/schema";
 
 const chartConfig = {
   desktop: {
