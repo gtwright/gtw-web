@@ -18,12 +18,6 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { stringToColor } from "@/lib/utils";
-type PerformanceData = {
-  work: string;
-  season_start: number;
-  conductor: string;
-  performances: number;
-};
 
 const chartConfig = {
   desktop: {
@@ -36,10 +30,19 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function ScatterHistoryChart({ data }: { data: PerformanceData[] }) {
+export interface PerformanceStats {
+  work: string;
+  conductor: string;
+  season_start: number;
+  season_end: number;
+  performances: number;
+  season: string;
+}
+
+export  function ScatterHistoryChart({ performances }: { performances: PerformanceStats[] }) {
   const uniqueWorks = useMemo(
-    () => Array.from(new Set(data.map((item) => item.work))),
-    [data]
+    () => Array.from(new Set(performances.map((item) => item.work))),
+    [performances]
   );
 
   const colorMap = useMemo(() => {
@@ -49,14 +52,14 @@ export function ScatterHistoryChart({ data }: { data: PerformanceData[] }) {
     });
     return map;
   }, [uniqueWorks]);
-  if (data.length === 0) {
+  if (performances.length === 0) {
     return <div>No data available</div>;
   }
 
   return (
     <ChartContainer config={chartConfig} className="min-h-[200px] w-full p-8">
       <ScatterChart
-        data={data || []}
+        data={performances || []}
         accessibilityLayer
         margin={{
           left: 20,
@@ -110,7 +113,7 @@ export function ScatterHistoryChart({ data }: { data: PerformanceData[] }) {
           }
         />
         <Scatter name="Performances">
-          {data.map((entry, index) => (
+          {performances.map((entry, index) => (
             <Cell
               key={`cell-${index}`}
               fill={colorMap.get(entry.work) || "#000000"}

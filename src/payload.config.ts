@@ -27,7 +27,6 @@ export default buildConfig({
   },
   db: vercelPostgresAdapter({
     beforeSchemaInit: [
-      // @ts-expect-error Schema type mismatch
       ({ schema }) => {
         return {
           ...schema,
