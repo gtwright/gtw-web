@@ -18,12 +18,14 @@ importers:
         specifier: ^3.11
         version: 3.11.0(@aws-sdk/client-sso-oidc@3.714.0(@aws-sdk/client-sts@3.714.0))(payload@3.11.0(bufferutil@4.0.8)(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)(utf-8-validate@6.0.5))
       '@payloadcms/richtext-lexical':
-
         specifier: ^3.11
         version: 3.11.0(ukrgmiwpy5jwklcpq4sddjnm4u)
       '@radix-ui/react-select':
         specifier: ^2.1.4
         version: 2.1.4(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@radix-ui/react-slot':
+        specifier: ^1.1.1
+        version: 1.1.1(@types/react@19.0.1)(react@19.0.0)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1

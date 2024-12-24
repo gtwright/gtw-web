@@ -2,7 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: auto;
+    font-weight: auto;
+  }
   :root {
     --radius: 0.5rem
+  }
+
+  /* * {
+    @apply border-border;
+  } */
+
+  body {
+    @apply min-h-[100dvh] flex flex-col antialiased;
   }
 }
