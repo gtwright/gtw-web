@@ -21,5 +21,6 @@ export default {
   		colors: {}
   	}
   },
+  // @ts-expect-error - Tailwind plugin import
   plugins: [require("tailwindcss-animate")],
 } satisfies Config

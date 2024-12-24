@@ -30,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${notoSans.variable} ${notoSerif.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen antialiased">
+      <body>
         <PostHogProvider>
           <SuspendedPostHogPageView />
           {children}
