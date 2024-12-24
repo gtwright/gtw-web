@@ -20,7 +20,6 @@ export default async function Page({params: paramsPromise}: Args) {
     notFound();
   }
 
-  console.log(page);
 
   return <article className="flex items-center justify-center h-screen">
     <h1>{page.title}</h1>

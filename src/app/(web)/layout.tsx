@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import { draftMode } from 'next/headers'
 import { PostHogProvider } from '@/lib/providers/providers'
-// These styles apply to every route in the application
 import '@/styles/globals.css'
 import { Noto_Serif, Noto_Sans } from 'next/font/google'
 import SuspendedPostHogPageView from '@/lib/providers/PostHogPageView'
+import { AdminBar } from '@/components/AdminBar'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -23,7 +24,8 @@ export const metadata: Metadata = {
   description: "Graham Wright's website",
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { isEnabled } = await draftMode()
   return (
     <html
       lang="en"
@@ -33,6 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <PostHogProvider>
           <SuspendedPostHogPageView />
+          <AdminBar  adminBarProps={{
+              preview: isEnabled,
+            }} />
           {children}
         </PostHogProvider>
       </body>
