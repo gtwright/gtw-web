@@ -5,7 +5,6 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: 'slug',
   },
-  auth: true,
   fields: [
     {
       name: 'slug',

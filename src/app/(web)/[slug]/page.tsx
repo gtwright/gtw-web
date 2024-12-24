@@ -1,7 +1,9 @@
+import { Metadata } from "next";
 import { getPayload } from "payload";
 import configPromise from "@/payload.config";
 import { cache } from "react";
 import {notFound} from "next/navigation";
+import { generateMeta } from "@/lib/utils/generateMeta";
 
 type Args = {
     params: Promise<{
@@ -18,24 +20,34 @@ export default async function Page({params: paramsPromise}: Args) {
     notFound();
   }
 
-  return <article className="pt-16 pb-24">
-    <h1>{url}</h1>
+  console.log(page);
+
+  return <article className="flex items-center justify-center h-screen">
+    <h1>{page.title}</h1>
   </article>;
 }
 
-const queryPageBySlug = cache(async (slug: string) => {
- const payload = await getPayload({config: configPromise});
- const result = await payload.find({
-    collection: 'pages',
-    // draft,
-    limit: 1,
-    pagination: false,
-    // overrideAccess: draft,
-    where: {
-      slug: {
-        equals: slug,
-      },
-    },
-  })
-  return result.docs?.[0] || null
-});
+
+
+export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
+    const { slug = 'home' } = await paramsPromise
+    const page = await queryPageBySlug(slug)
+    return generateMeta({ doc: page })
+  }
+
+  const queryPageBySlug = cache(async (slug: string) => {
+    const payload = await getPayload({config: configPromise});
+    const result = await payload.find({
+       collection: 'pages',
+       // draft,
+       limit: 1,
+       pagination: false,
+       // overrideAccess: draft,
+       where: {
+         slug: {
+           equals: slug,
+         },
+       },
+     })
+     return result.docs?.[0] || null
+   });
