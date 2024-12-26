@@ -32,12 +32,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${notoSans.variable} ${notoSerif.variable}`}
       suppressHydrationWarning
     >
-      <body>
+      <body className="min-h-[100dvh] flex flex-col antialiased">
         <PostHogProvider>
           <SuspendedPostHogPageView />
-          <AdminBar  adminBarProps={{
+          <AdminBar
+            adminBarProps={{
               preview: isEnabled,
-            }} />
+            }}
+          />
           {children}
         </PostHogProvider>
       </body>
