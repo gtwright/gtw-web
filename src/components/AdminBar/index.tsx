@@ -20,9 +20,9 @@ export const AdminBar: React.FC<{
 }> = (props) => {
   const { adminBarProps } = props || {}
   const segments = useSelectedLayoutSegments()
+  console.log(segments)
   const [show, setShow] = useState(false)
   const router = useRouter()
-  console.log(segments)
   const onAuthChange = React.useCallback((user: PayloadMeUser) => {
     setShow(!!user?.id)
   }, [])
