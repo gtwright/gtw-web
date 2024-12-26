@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   payload:
     image: node:22-alpine
@@ -20,7 +18,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     env_file:
       - .env
     healthcheck:
@@ -30,4 +28,4 @@ services:
       retries: 5
 volumes:
   node_modules:
-  data:
+  pgdata:
