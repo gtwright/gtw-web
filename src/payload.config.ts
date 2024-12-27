@@ -26,12 +26,6 @@ export default buildConfig({
   },
   collections: [Pages, Posts, Media, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
-  editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
   db: vercelPostgresAdapter({
     beforeSchemaInit: [
       ({ schema }) => {
@@ -45,7 +39,13 @@ export default buildConfig({
       },
     ],
   }),
+  editor: lexicalEditor(),
+  globals: [Header, Footer],
+  secret: process.env.PAYLOAD_SECRET || '',
   sharp,
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
