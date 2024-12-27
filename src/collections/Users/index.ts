@@ -18,6 +18,6 @@ export const Users: CollectionConfig = {
   fields: [
     // Email added by default
     // Add more fields as needed
-    { name: 'updatedAt', type: 'date', admin: { readOnly: true } },
   ],
+  timestamps: true,
 }

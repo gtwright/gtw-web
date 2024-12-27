@@ -1,23 +1,20 @@
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
+import { slugField } from '@/fields/slug'
 import type { CollectionConfig } from 'payload'
 
-export const Pages: CollectionConfig = {
-  slug: 'pages',
+export const Posts: CollectionConfig = {
+  slug: 'posts',
   admin: {
     useAsTitle: 'slug',
   },
   fields: [
     {
-      name: 'slug',
-      type: 'text',
-      required: true,
-    },
-    {
       name: 'title',
       type: 'text',
       required: true,
     },
+    ...slugField(),
     {
       name: 'publishedAt',
       type: 'date',
@@ -40,4 +37,5 @@ export const Pages: CollectionConfig = {
     },
     maxPerDoc: 50,
   },
+  timestamps: true,
 }
