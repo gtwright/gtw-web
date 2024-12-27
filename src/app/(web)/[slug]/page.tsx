@@ -6,10 +6,29 @@ import { notFound } from 'next/navigation'
 import { generateMeta } from '@/lib/utils/generateMeta'
 import { draftMode } from 'next/headers'
 import { Footer } from '@/components/Footer'
+
 type Args = {
   params: Promise<{
     slug?: string
   }>
+}
+
+export const dynamicParams = true
+export const revalidate = 86400 // 60 seconds * 60 minutes * 24 hours
+
+export async function generateStaticParams() {
+  const payload = await getPayload({ config: configPromise })
+  const pages = await payload.find({
+    collection: 'pages',
+    draft: false,
+    limit: 1000,
+    overrideAccess: false,
+    select: { slug: true },
+  })
+
+  const params = pages.docs?.filter((page) => page.slug !== 'home').map(({ slug }) => ({ slug }))
+
+  return params
 }
 
 export default async function Page({ params: paramsPromise }: Args) {
