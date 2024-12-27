@@ -5,6 +5,7 @@ import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { generateMeta } from '@/lib/utils/generateMeta'
 import { draftMode } from 'next/headers'
+import { Footer } from '@/components/Footer'
 type Args = {
   params: Promise<{
     slug?: string
@@ -20,9 +21,12 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   return (
-    <article className="flex flex-col items-center justify-center prose container pt-12 min-h-dvh">
-      <h1>{page.title}</h1>
-    </article>
+    <>
+      <article className="flex flex-col items-center justify-center prose container pt-12 min-h-dvh">
+        <h1>{page.title}</h1>
+      </article>
+      <Footer />
+    </>
   )
 }
 
