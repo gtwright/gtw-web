@@ -20,6 +20,9 @@ importers:
       '@payloadcms/richtext-lexical':
         specifier: ^3.11
         version: 3.11.0(ukrgmiwpy5jwklcpq4sddjnm4u)
+      '@payloadcms/ui':
+        specifier: ^3.11.0
+        version: 3.11.0(@types/react@19.0.1)(monaco-editor@0.52.2)(next@15.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.77.4))(payload@3.11.0(bufferutil@4.0.8)(graphql@16.10.0)(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)(utf-8-validate@6.0.5))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(typescript@5.7.2)
       '@radix-ui/react-select':
         specifier: ^2.1.4
         version: 2.1.4(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
