@@ -4,6 +4,7 @@ import configPromise from '@/payload.config'
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { generateMeta } from '@/lib/utils/generateMeta'
+import { draftMode } from 'next/headers'
 type Args = {
   params: Promise<{
     slug?: string
@@ -19,8 +20,8 @@ export default async function Page({ params: paramsPromise }: Args) {
   }
 
   return (
-    <article className="flex flex-col items-center justify-center prose container mt-12">
-      <h1 className="font-serif">{page.title}</h1>
+    <article className="flex flex-col items-center justify-center prose container pt-12 min-h-dvh">
+      <h1>{page.title}</h1>
     </article>
   )
 }
@@ -32,13 +33,15 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 }
 
 const queryPageBySlug = cache(async (slug: string) => {
+  const { isEnabled: draft } = await draftMode()
+  console.log(draft)
   const payload = await getPayload({ config: configPromise })
   const result = await payload.find({
     collection: 'pages',
-    // draft,
+    draft,
     limit: 1,
     pagination: false,
-    // overrideAccess: draft,
+    overrideAccess: draft,
     where: {
       slug: {
         equals: slug,
