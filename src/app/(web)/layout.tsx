@@ -40,6 +40,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${notoSans.variable} ${notoSerif.variable} ${notoSansMono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" sizes="32x32" href="/favicon-32x32.png" />
+      </head>
       <body className="min-h-[100dvh] flex flex-col antialiased">
         <PostHogProvider>
           <SuspendedPostHogPageView />
