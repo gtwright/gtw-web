@@ -5,7 +5,6 @@ import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { generateMeta } from '@/lib/utils/generateMeta'
 import { draftMode } from 'next/headers'
-import { Footer } from '@/components/Footer'
 
 type Args = {
   params: Promise<{
@@ -44,7 +43,6 @@ export default async function Page({ params: paramsPromise }: Args) {
       <article className="flex flex-col items-center justify-center prose container pt-12 min-h-dvh">
         <h1>{page.title}</h1>
       </article>
-      <Footer />
     </>
   )
 }
@@ -57,7 +55,6 @@ export async function generateMetadata({ params: paramsPromise }: Args): Promise
 
 const queryPageBySlug = cache(async (slug: string) => {
   const { isEnabled: draft } = await draftMode()
-  console.log(draft)
   const payload = await getPayload({ config: configPromise })
   const result = await payload.find({
     collection: 'pages',

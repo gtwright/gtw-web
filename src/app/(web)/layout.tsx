@@ -5,6 +5,7 @@ import '@/styles/globals.css'
 import { Noto_Serif, Noto_Sans, Noto_Sans_Mono } from 'next/font/google'
 import SuspendedPostHogPageView from '@/lib/providers/PostHogPageView'
 import { AdminBar } from '@/components/AdminBar'
+import { Footer } from '@/components/Footer'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -53,6 +54,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             }}
           />
           {children}
+          <Footer />
         </PostHogProvider>
       </body>
     </html>
