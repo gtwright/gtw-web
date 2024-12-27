@@ -13,6 +13,7 @@ import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
+import { getServerSideURL } from './lib/utils/getURL'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -24,6 +25,7 @@ export default buildConfig({
     },
   },
   collections: [Pages, Posts, Media, Users],
+  cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
