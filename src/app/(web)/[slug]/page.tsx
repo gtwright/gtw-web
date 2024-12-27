@@ -13,6 +13,9 @@ type Args = {
   }>
 }
 
+export const dynamicParams = true
+export const revalidate = 60 * 60 * 24 // Revalidate every 24 hours
+
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const pages = await payload.find({
