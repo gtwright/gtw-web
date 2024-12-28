@@ -53,8 +53,6 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   plugins: [
-    // payloadCloudPlugin(),
-    // storage-adapter-placeholder
     s3Storage({
       collections: {
         media: {
