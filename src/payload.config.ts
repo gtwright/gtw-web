@@ -14,6 +14,7 @@ import { Posts } from './collections/Posts'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
 import { getServerSideURL } from './lib/utils/getURL'
+import { resendAdapter } from '@payloadcms/email-resend'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -40,6 +41,11 @@ export default buildConfig({
     ],
   }),
   editor: lexicalEditor(),
+  email: resendAdapter({
+    apiKey: process.env.RESEND_API_KEY || '',
+    defaultFromAddress: 'g@gtw.dev',
+    defaultFromName: 'GTW Dev',
+  }),
   globals: [Header, Footer],
   secret: process.env.PAYLOAD_SECRET || '',
   sharp,
