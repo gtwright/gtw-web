@@ -14,6 +14,7 @@ import { Posts } from './collections/Posts'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
 import { getServerSideURL } from './lib/utils/getURL'
+import { resendAdapter } from '@payloadcms/email-resend'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -26,12 +27,6 @@ export default buildConfig({
   },
   collections: [Pages, Posts, Media, Users],
   cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
-  editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
-  typescript: {
-    outputFile: path.resolve(dirname, 'payload-types.ts'),
-  },
   db: vercelPostgresAdapter({
     beforeSchemaInit: [
       ({ schema }) => {
@@ -45,7 +40,18 @@ export default buildConfig({
       },
     ],
   }),
+  editor: lexicalEditor(),
+  email: resendAdapter({
+    apiKey: process.env.RESEND_API_KEY || '',
+    defaultFromAddress: 'g@gtw.dev',
+    defaultFromName: 'GTW Dev',
+  }),
+  globals: [Header, Footer],
+  secret: process.env.PAYLOAD_SECRET || '',
   sharp,
+  typescript: {
+    outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
