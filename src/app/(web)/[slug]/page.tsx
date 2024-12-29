@@ -4,6 +4,7 @@ import configPromise from '@/payload.config'
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { generateMeta } from '@/lib/utils/generateMeta'
+import StyleTest from '@/components/StyleTest'
 import { draftMode } from 'next/headers'
 
 type Args = {
@@ -40,8 +41,10 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   return (
     <>
-      <article className="flex flex-col items-center justify-center prose container pt-12 min-h-dvh">
-        <h1 className="dark:text-white">{page.title}</h1>
+      <article className="flex flex-col items-center justify-center container pt-12 min-h-dvh">
+        <div className="prose dark:prose-invert ">
+          <h1>{page.title}</h1>
+        </div>
       </article>
     </>
   )

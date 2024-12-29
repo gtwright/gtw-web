@@ -7,7 +7,6 @@ import type { Theme, ThemeContextType } from './types'
 import canUseDOM from '@/lib/utils/canUseDOM'
 import { defaultTheme, themeLocalStorageKey } from './types'
 import { themeIsValid } from './types'
-import { getImplicitThemePreference } from '@/lib/utils/getImplicitThemePreference'
 const initialContext: ThemeContextType = {
   setTheme: () => null,
   theme: undefined,
@@ -46,7 +45,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         themeToSet = implicitPreference
       }
     }
-    console.log(theme, themeToSet)
     document.documentElement.setAttribute('data-theme', themeToSet)
     setThemeState(themeToSet)
   }, [])
@@ -55,3 +53,15 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 }
 
 export const useTheme = (): ThemeContextType => useContext(ThemeContext)
+
+export const getImplicitThemePreference = (): 'dark' | 'light' | null => {
+  const mediaQuery = '(prefers-color-scheme: dark)'
+  const mql = window.matchMedia(mediaQuery)
+  const hasImplicitPreference = typeof mql.matches === 'boolean'
+
+  if (hasImplicitPreference) {
+    return mql.matches ? 'dark' : 'light'
+  }
+
+  return null
+}
