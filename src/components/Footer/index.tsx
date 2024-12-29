@@ -9,10 +9,11 @@ export async function Footer() {
   const navItems = footerData?.navItems || []
   return (
     <footer className="p-4">
-      <div className="container flex flex-col items-center justify-center">
+      <div className="container flex flex-row items-center justify-center">
+        <Link href="/">Home</Link>
         <ThemeSelector />
         {navItems.map(({ link }, i) => (
-          <Link key={i} href={link.url || ''} className="text-sm">
+          <Link key={i} href={link.url || ''}>
             {link.label}
           </Link>
         ))}
