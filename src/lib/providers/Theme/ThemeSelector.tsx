@@ -8,11 +8,9 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import React, { useState } from 'react'
-
 import type { Theme } from './types'
-
-import { useTheme } from './ThemeProvider'
 import { themeLocalStorageKey } from './types'
+import { useTheme } from './ThemeProvider'
 
 export const ThemeSelector: React.FC = () => {
   const { setTheme } = useTheme()
