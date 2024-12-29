@@ -4,7 +4,6 @@ import configPromise from '@/payload.config'
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { generateMeta } from '@/lib/utils/generateMeta'
-import StyleTest from '@/components/StyleTest'
 import { draftMode } from 'next/headers'
 
 type Args = {
