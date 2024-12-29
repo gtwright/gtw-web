@@ -57,6 +57,7 @@ export const Posts: CollectionConfig = {
   },
   versions: {
     drafts: {
+      schedulePublish: true,
       autosave: {
         interval: 100, // We set this interval for optimal live preview
       },
