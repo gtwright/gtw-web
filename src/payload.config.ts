@@ -48,6 +48,7 @@ export default buildConfig({
   }),
   globals: [Header, Footer],
   jobs: {
+    tasks: [],
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {
         // Allow logged in users to execute this endpoint (default)
