@@ -6,6 +6,8 @@ import { Noto_Serif, Noto_Sans, Noto_Sans_Mono } from 'next/font/google'
 import SuspendedPostHogPageView from '@/lib/providers/PostHogPageView'
 import { AdminBar } from '@/components/AdminBar'
 import { Footer } from '@/components/Footer'
+import { ThemeProvider } from '@/lib/providers/Theme/ThemeProvider'
+import { InitTheme } from '@/lib/providers/Theme/InitTheme'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
@@ -42,20 +44,23 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       suppressHydrationWarning
     >
       <head>
+        <InitTheme />
         <link rel="icon" href="/favicon.ico" />
         <link rel="icon" sizes="32x32" href="/favicon-32x32.png" />
       </head>
       <body className="min-h-[100dvh] flex flex-col antialiased">
-        <PostHogProvider>
-          <SuspendedPostHogPageView />
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
-          {children}
-          <Footer />
-        </PostHogProvider>
+        <ThemeProvider>
+          <PostHogProvider>
+            <SuspendedPostHogPageView />
+            <AdminBar
+              adminBarProps={{
+                preview: isEnabled,
+              }}
+            />
+            {children}
+            <Footer />
+          </PostHogProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
