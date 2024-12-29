@@ -48,16 +48,13 @@ export interface Config {
   };
   jobs: {
     tasks: {
-      testingTask: TaskTestingTask;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
         output: unknown;
       };
     };
-    workflows: {
-      testingWorkflow: WorkflowTestingWorkflow;
-    };
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -210,7 +207,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'testingTask' | 'schedulePublish';
+        taskSlug: 'inline' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -243,8 +240,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  workflowSlug?: 'testingWorkflow' | null;
-  taskSlug?: ('inline' | 'testingTask' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -405,7 +401,6 @@ export interface PayloadJobsSelect<T extends boolean = true> {
         error?: T;
         id?: T;
       };
-  workflowSlug?: T;
   taskSlug?: T;
   queue?: T;
   waitUntil?: T;
@@ -551,18 +546,6 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "TaskTestingTask".
- */
-export interface TaskTestingTask {
-  input: {
-    title: string;
-  };
-  output: {
-    outputTitle: string;
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
@@ -581,15 +564,6 @@ export interface TaskSchedulePublish {
     global?: string | null;
   };
   output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "WorkflowTestingWorkflow".
- */
-export interface WorkflowTestingWorkflow {
-  input: {
-    title: string;
-  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

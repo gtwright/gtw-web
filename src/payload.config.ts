@@ -2,7 +2,7 @@
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig, PayloadRequest, TaskConfig, WorkflowConfig } from 'payload'
+import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { beethoven } from './lib/schema'
@@ -48,51 +48,9 @@ export default buildConfig({
   }),
   globals: [Header, Footer],
   jobs: {
-    tasks: [
-      {
-        slug: 'testingTask',
-        inputSchema: [
-          {
-            name: 'title',
-            type: 'text',
-            required: true,
-          },
-        ],
-        outputSchema: [
-          {
-            name: 'outputTitle',
-            type: 'text',
-            required: true,
-          },
-        ],
-        handler: async ({ input, job, req }) => {
-          return {
-            output: { outputTitle: input.title },
-          }
-        },
-      } as TaskConfig<'testingTask'>,
-    ],
-    workflows: [
-      {
-        slug: 'testingWorkflow',
-        queue: 'testingQueue',
-        inputSchema: [
-          {
-            name: 'title',
-            type: 'text',
-            required: true,
-          },
-        ],
-        handler: async ({ job, tasks }) => {
-          console.log('Running workflow test', job.input)
-          await tasks.testingTask('1', { input: { title: job.input.title } })
-        },
-      } as WorkflowConfig<'testingWorkflow'>,
-    ],
     access: {
       run: ({ req }: { req: PayloadRequest }): boolean => {
         // Allow logged in users to execute this endpoint (default)
-        console.log(req.user)
         if (req.user) return true
         // If there is no logged in user, then check
         // for the Vercel Cron secret to be present as an
