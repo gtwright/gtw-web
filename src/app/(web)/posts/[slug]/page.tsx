@@ -5,7 +5,7 @@ import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { generateMeta } from '@/lib/utils/generateMeta'
 import { draftMode } from 'next/headers'
-import RichText from '@/components/RichText'
+import RichTextComponent from '@/components/RichText'
 
 type Args = {
   params: Promise<{
@@ -43,7 +43,7 @@ export default async function Page({ params: paramsPromise }: Args) {
     <article className="flex flex-col items-center justify-center container pt-12 min-h-dvh">
       <div className="prose dark:prose-invert ">
         <h1>{post.title}</h1>
-        <RichText data={post.content} enableGutter={false} enableProse={true} />
+        <RichTextComponent data={post.content} />
       </div>
     </article>
   )
