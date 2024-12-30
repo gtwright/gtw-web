@@ -24,7 +24,7 @@ export async function generateStaticParams() {
     overrideAccess: false,
     select: { slug: true },
   })
-
+  
   const params = pages.docs?.filter((page) => page.slug !== 'home').map(({ slug }) => ({ slug }))
 
   return params
@@ -37,6 +37,8 @@ export default async function Page({ params: paramsPromise }: Args) {
   if (!page) {
     notFound()
   }
+
+  
 
   return (
     <>

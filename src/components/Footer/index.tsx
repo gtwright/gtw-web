@@ -7,16 +7,18 @@ export async function Footer() {
   const footerData: FooterType = await getCachedGlobal('footer', 1)()
 
   const navItems = footerData?.navItems || []
+
   return (
     <footer className="p-4">
-      <div className="container flex flex-row items-center justify-center">
-        <Link href="/">Home</Link>
+      <div className="container flex flex-row items-center justify-between">
+        <div>
+          {navItems.map(({ link }, i) => (
+            <Link key={i} href={link.url || ''} className="mx-4">
+              {link.label}
+            </Link>
+          ))}
+        </div>
         <ThemeSelector />
-        {navItems.map(({ link }, i) => (
-          <Link key={i} href={link.url || ''}>
-            {link.label}
-          </Link>
-        ))}
       </div>
     </footer>
   )
