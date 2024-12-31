@@ -2,8 +2,12 @@ import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { slugField } from '@/fields/slug'
 import type { CollectionConfig } from 'payload'
-import { BlocksFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
+
+import { BlocksFeature, lexicalEditor, HeadingFeature } from '@payloadcms/richtext-lexical'
 import { Banner } from '@/blocks/Banner/config'
+import { Code } from '@/blocks/Code/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
@@ -22,8 +26,9 @@ export const Posts: CollectionConfig = {
         features: ({ defaultFeatures, rootFeatures }) => [
           ...defaultFeatures,
           ...rootFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
           BlocksFeature({
-            blocks: [Banner],
+            blocks: [MediaBlock, Banner, Code],
           }),
         ],
       }),

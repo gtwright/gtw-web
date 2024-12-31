@@ -7,7 +7,6 @@ export async function Footer() {
   const footerData: FooterType = await getCachedGlobal('footer', 1)()
 
   const navItems = footerData?.navItems || []
-  console.log(navItems)
 
   return (
     <footer className="p-4">
