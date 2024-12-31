@@ -31,6 +31,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const defaultSitemap = [
     {
+      url: `${SITE_URL}/posts`,
+      lastModified: dateFallback,
+    },
+    {
       url: `${SITE_URL}/beethoven`,
       lastModified: dateFallback,
     },
