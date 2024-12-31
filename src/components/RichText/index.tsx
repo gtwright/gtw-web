@@ -7,13 +7,15 @@ import {
 import { cn } from '@/lib/utils/cn'
 import type { BannerBlock as BannerBlockProps } from '@/payload-types'
 import { BannerBlock } from '@/blocks/Banner/Component'
+import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
 
-type NodeTypes = DefaultNodeTypes | SerializedBlockNode<BannerBlockProps>
+type NodeTypes = DefaultNodeTypes | SerializedBlockNode<BannerBlockProps | CodeBlockProps>
 
 const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) => ({
   ...defaultConverters,
   blocks: {
     banner: ({ node }) => <BannerBlock className="col-start-2 mb-4" {...node.fields} />,
+    code: ({ node }) => <CodeBlock className="col-start-2" {...node.fields} />,
   },
 })
 
