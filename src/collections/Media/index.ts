@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { anyone } from '@/access/anyone'
 import { authenticated } from '@/access/authenticated'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -16,6 +17,15 @@ export const Media: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'caption',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => {
+          return [...rootFeatures]
+        },
+      }),
     },
   ],
   upload: true,
