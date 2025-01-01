@@ -42,7 +42,7 @@ export default async function Page({ params: paramsPromise }: Args) {
   return (
     <article className="flex flex-col items-center justify-center container pt-12 min-h-dvh">
       <div className="prose dark:prose-invert ">
-        <h1>{post.title}</h1>
+        <h1 className="font-serif font-condensed">{post.title}</h1>
         <RichTextComponent data={post.content} />
       </div>
     </article>
