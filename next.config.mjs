@@ -1,14 +1,17 @@
 import { withPayload } from '@payloadcms/next/withPayload'
 
-const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : undefined || process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3001'
+const NEXT_PUBLIC_SERVER_URL =
+  `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` ?? process.env.NEXT_PUBLIC_SERVER_URL
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Your Next.js config here
   images: {
     remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+      },
       ...[NEXT_PUBLIC_SERVER_URL].map((item) => {
         const url = new URL(item)
 

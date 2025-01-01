@@ -24,7 +24,7 @@ export async function generateStaticParams() {
     overrideAccess: false,
     select: { slug: true },
   })
-  
+
   const params = pages.docs?.filter((page) => page.slug !== 'home').map(({ slug }) => ({ slug }))
 
   return params
@@ -38,13 +38,11 @@ export default async function Page({ params: paramsPromise }: Args) {
     notFound()
   }
 
-  
-
   return (
     <>
       <article className="flex flex-col items-center justify-center container pt-12 min-h-dvh">
         <div className="prose dark:prose-invert ">
-          <h1>{page.title}</h1>
+          <h1 className="font-serif font-condensed">{page.title}</h1>
         </div>
       </article>
     </>

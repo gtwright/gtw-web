@@ -11,7 +11,8 @@ import { InitTheme } from '@/lib/providers/Theme/InitTheme'
 
 const notoSerif = Noto_Serif({
   subsets: ['latin'],
-  weight: ['400', '700'],
+  weight: 'variable',
+  axes: ['wdth'],
   display: 'swap',
   variable: '--font-noto-serif',
 })
