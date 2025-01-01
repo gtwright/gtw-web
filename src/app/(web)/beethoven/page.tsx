@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { ScatterHistoryComponent } from '@/components/beethoven/ScatterHistoryComponent'
 import { ConductorComponent } from '@/components/beethoven/ConductorComponent'
 import type { Metadata } from 'next'
+import Link from '@/components/Link'
 
 export default async function Page(props: { searchParams?: Promise<{ conductor?: string }> }) {
   const searchParams = await props.searchParams
@@ -13,7 +14,8 @@ export default async function Page(props: { searchParams?: Promise<{ conductor?:
       </h1>
       <p className="text-lg pb-4 max-w-4xl font-serif">
         This chart shows the number of times each Beethoven symphony has been performed by the
-        Boston Symphony Orchestra, grouped by the starting year of the season.
+        Boston Symphony Orchestra, grouped by the starting year of the season. Data from{' '}
+        <Link href="https://archives.bso.org/">HENRY</Link>.
       </p>
       <div className="mb-4">
         <Suspense
