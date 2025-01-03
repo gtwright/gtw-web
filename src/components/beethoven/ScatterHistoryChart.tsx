@@ -1,16 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import {
-  ScatterChart,
-  Scatter,
-  Cell,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  ZAxis,
-  ResponsiveContainer,
-} from 'recharts'
+import { ScatterChart, Scatter, Cell, CartesianGrid, XAxis, YAxis, ZAxis } from 'recharts'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   ChartConfig,
@@ -65,68 +56,66 @@ export function ScatterHistoryChart({ performances }: { performances: Performanc
   }
 
   return (
-    <Card className="w-full">
+    <Card>
       <CardContent>
-        <ChartContainer config={chartConfig} className="h-[600px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <ScatterChart
-              data={performances || []}
-              accessibilityLayer
-              margin={{
-                top: 20,
-                right: 20,
-                bottom: 20,
-                left: 10,
+        <ChartContainer config={chartConfig}>
+          <ScatterChart
+            data={performances || []}
+            accessibilityLayer
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 10,
+            }}
+          >
+            <CartesianGrid vertical={false} />
+            <XAxis
+              type="number"
+              dataKey="season_start"
+              name="Season Start"
+              allowDecimals={false}
+              tickCount={8}
+              interval={0}
+              domain={['dataMin', 'dataMax']}
+            />
+            <YAxis
+              type="category"
+              dataKey="work"
+              name="Work"
+              allowDuplicatedCategory={false}
+              minTickGap={10}
+              tickMargin={10}
+              width={100}
+              tickFormatter={(value) => {
+                const [work] = value.split(' in ')
+                return work.trim()
               }}
-            >
-              <CartesianGrid vertical={false} />
-              <XAxis
-                type="number"
-                dataKey="season_start"
-                name="Season Start"
-                allowDecimals={false}
-                tickCount={8}
-                interval={0}
-                domain={['dataMin', 'dataMax']}
-              />
-              <YAxis
-                type="category"
-                dataKey="work"
-                name="Work"
-                allowDuplicatedCategory={false}
-                minTickGap={10}
-                tickMargin={10}
-                width={100}
-                tickFormatter={(value) => {
-                  const [work] = value.split(' in ')
-                  return work.trim()
-                }}
-              />
-              <ZAxis type="number" dataKey="performances" range={[10, 1000]} name="Performances" />
-              <ChartTooltip
-                content={
-                  <ChartTooltipContent
-                    formatter={(value, name, item, index) => {
-                      if (index !== 0) return null
+            />
+            <ZAxis type="number" dataKey="performances" range={[10, 1000]} name="Performances" />
+            <ChartTooltip
+              content={
+                <ChartTooltipContent
+                  formatter={(value, name, item, index) => {
+                    if (index !== 0) return null
 
-                      return (
-                        <div className="flex flex-col gap-1">
-                          <p className="font-medium">{item.payload.work}</p>
-                          <p>Season: {item.payload.season}</p>
-                          <p>Performances: {item.payload.performances}</p>
-                        </div>
-                      )
-                    }}
-                  />
-                }
-              />
-              <Scatter name="Performances">
-                {performances.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={colorMap.get(entry.work) || '#000000'} />
-                ))}
-              </Scatter>
-            </ScatterChart>
-          </ResponsiveContainer>
+                    return (
+                      <div className="flex flex-col gap-1">
+                        <p className="font-medium">{item.payload.work}</p>
+                        <p>Season: {item.payload.season}</p>
+                        <p>Performances: {item.payload.performances}</p>
+                      </div>
+                    )
+                  }}
+                />
+              }
+            />
+            <Scatter name="Performances">
+              {performances.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={colorMap.get(entry.work) || '#000000'} />
+              ))}
+            </Scatter>
+          </ScatterChart>
         </ChartContainer>
       </CardContent>
     </Card>
