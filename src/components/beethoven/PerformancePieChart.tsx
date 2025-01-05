@@ -1,7 +1,7 @@
 'use client'
 
 import { useMemo } from 'react'
-import { PieChart, Pie, Cell } from 'recharts'
+import { PieChart, Pie, Cell, LabelList, Label } from 'recharts'
 import { Card, CardContent } from '@/components/ui/card'
 import {
   ChartConfig,
@@ -53,17 +53,39 @@ export function PerformancePieChart({ performances }: { performances: Performanc
     <Card>
       <CardContent>
         <ChartContainer config={chartConfig}>
-          <PieChart>
+          <PieChart
+            accessibilityLayer
+            margin={{
+              top: 20,
+              right: 20,
+              bottom: 20,
+              left: 20,
+            }}
+          >
             <Pie
               data={pieData}
               dataKey="value"
               nameKey="name"
               cx="50%"
               cy="50%"
-              outerRadius="90%"
               innerRadius="50%"
-              label={(entry) => entry.name}
               labelLine
+              label={({ payload, ...props }) => {
+                return (
+                  <text
+                    className="dark:fill-slate-50 fill-black"
+                    fill="white"
+                    cx={props.cx}
+                    cy={props.cy}
+                    x={props.x}
+                    y={props.y}
+                    textAnchor={props.textAnchor}
+                    dominantBaseline={props.dominantBaseline}
+                  >
+                    {payload.name}
+                  </text>
+                )
+              }}
             >
               {pieData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={stringToColor(entry.fullName)} />
