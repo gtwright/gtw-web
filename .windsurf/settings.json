@@ -1,0 +1,13 @@
+{
+  "autoRunCommands": {
+    "git": {
+      "allowedArgs": [
+        ["diff", "--cached", "--name-status"],
+        ["diff", "--cached"],
+        ["status", "--porcelain"],
+        ["diff"],
+        ["status"]
+      ]
+    }
+  }
+}
