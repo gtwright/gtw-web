@@ -31,25 +31,33 @@ export interface PerformanceStats {
   season: string
 }
 
-export function ScatterHistoryChart({ performances }: { performances: PerformanceStats[] }) {
+interface ScatterHistoryChartProps {
+  performances: PerformanceStats[]
+}
+
+const CHART_MARGINS = {
+  top: 20,
+  right: 20,
+  bottom: 20,
+  left: 10,
+} as const
+
+export function ScatterHistoryChart({ performances }: ScatterHistoryChartProps) {
   const uniqueWorks = useMemo(
     () => Array.from(new Set(performances.map((item) => item.work))),
     [performances],
   )
 
-  const colorMap = useMemo(() => {
-    const map = new Map<string, string>()
-    uniqueWorks.forEach((work) => {
-      map.set(work, stringToColor(work))
-    })
-    return map
-  }, [uniqueWorks])
+  const colorMap = useMemo(
+    () => new Map(uniqueWorks.map((work) => [work, stringToColor(work)])),
+    [uniqueWorks],
+  )
 
   if (performances.length === 0) {
     return (
       <Card className="w-full">
         <CardContent className="pt-6">
-          <div>No data available</div>
+          <div className="text-muted-foreground">No performance data available</div>
         </CardContent>
       </Card>
     )
@@ -62,14 +70,14 @@ export function ScatterHistoryChart({ performances }: { performances: Performanc
           <ScatterChart
             data={performances || []}
             accessibilityLayer
-            margin={{
-              top: 20,
-              right: 20,
-              bottom: 20,
-              left: 10,
-            }}
+            margin={CHART_MARGINS}
+            aria-label="Beethoven performance history scatter plot showing works performed over time"
           >
-            <CartesianGrid vertical={false} />
+            <CartesianGrid
+              vertical={false}
+              stroke="currentColor"
+              className="text-gray-200 dark:text-gray-800"
+            />
             <XAxis
               type="number"
               dataKey="season_start"
@@ -80,6 +88,11 @@ export function ScatterHistoryChart({ performances }: { performances: Performanc
               domain={['dataMin', 'dataMax']}
               stroke="currentColor"
               className="text-black dark:text-slate-50"
+              label={{
+                value: 'Season',
+                position: 'bottom',
+                className: 'fill-black dark:fill-slate-50',
+              }}
             />
             <YAxis
               type="category"
