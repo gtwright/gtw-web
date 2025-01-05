@@ -78,6 +78,8 @@ export function ScatterHistoryChart({ performances }: { performances: Performanc
               tickCount={8}
               interval={0}
               domain={['dataMin', 'dataMax']}
+              stroke="currentColor"
+              className="text-black dark:text-slate-50"
             />
             <YAxis
               type="category"
@@ -91,6 +93,8 @@ export function ScatterHistoryChart({ performances }: { performances: Performanc
                 const [work] = value.split(' in ')
                 return work.trim()
               }}
+              stroke="currentColor"
+              className="text-black dark:text-slate-50"
             />
             <ZAxis type="number" dataKey="performances" range={[10, 1000]} name="Performances" />
             <ChartTooltip
