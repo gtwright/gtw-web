@@ -5,7 +5,9 @@ const NEXT_PUBLIC_SERVER_URL =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Your Next.js config here
+  experimental: {
+    ppr: true,
+  },
   images: {
     remotePatterns: [
       {
