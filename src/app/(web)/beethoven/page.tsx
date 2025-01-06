@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { ScatterHistoryComponent } from '@/components/beethoven/ScatterHistoryComponent'
+import { ChartsComponent } from '@/components/beethoven/ChartsComponent'
 import { ConductorComponent } from '@/components/beethoven/ConductorComponent'
 import type { Metadata } from 'next'
 import Link from '@/components/Link'
@@ -40,7 +40,7 @@ export default async function Page(props: { searchParams?: Promise<{ conductor?:
             </div>
           }
         >
-          <ScatterHistoryComponent conductor={conductor} />
+          <ChartsComponent conductor={conductor} />
         </Suspense>
       </div>
     </div>
@@ -48,9 +48,40 @@ export default async function Page(props: { searchParams?: Promise<{ conductor?:
 }
 
 export const metadata: Metadata = {
-  title: 'Beethoven Symphonies',
-  description: 'The BSO and Beethoven Symphonies',
+  title: 'The BSO and Beethoven Symphonies',
+  description:
+    'Explore the history of Beethoven symphony performances by the Boston Symphony Orchestra through interactive visualizations. Data sourced from HENRY archives.',
   openGraph: {
-    images: '/beethoven-symph.png',
+    title: 'The BSO and Beethoven Symphonies',
+    description:
+      'Interactive visualization of Beethoven symphony performances by the Boston Symphony Orchestra',
+    type: 'website',
+    images: [
+      {
+        url: '/beethoven-symph.png',
+        width: 1200,
+        height: 630,
+        alt: 'Beethoven Symphony Performance Analysis',
+      },
+    ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'The BSO and Beethoven Symphonies',
+    description:
+      'Interactive visualization of Beethoven symphony performances by the Boston Symphony Orchestra',
+    images: ['/beethoven-symph.png'],
+  },
+  alternates: {
+    canonical: '/beethoven',
+  },
+  keywords: [
+    'Beethoven',
+    'Symphony',
+    'Boston Symphony Orchestra',
+    'BSO',
+    'Classical Music',
+    'Orchestra',
+    'Performance History',
+  ],
 }
