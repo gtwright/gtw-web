@@ -7,6 +7,7 @@ const NEXT_PUBLIC_SERVER_URL =
 const nextConfig = {
   // Your Next.js config here
   images: {
+    domains: ['picsum.photos'],
     remotePatterns: [
       {
         protocol: 'http',
