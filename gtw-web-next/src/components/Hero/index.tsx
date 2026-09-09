@@ -2,9 +2,8 @@
 // Usage example:
 // <Hero title="Welcome" subtitle="Modern web experiences" ctaLabel="Get Started" onCtaClick={() => {}} imageUrl="/hero.jpg" imageAlt="Hero image" align="center" />
 
-import type { ReactNode } from 'react'
 import Image from 'next/image'
-import { Button } from '../ui/button'
+import { ReactNode } from 'react'
 
 export interface HeroProps {
   title: string

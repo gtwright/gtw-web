@@ -44,7 +44,7 @@ export default async function Page({ params: paramsPromise }: Args) {
       <Hero
         title={page.title}
         subtitle="Subtitle!"
-        imageUrl="https://picsum.photos/1200/600"
+        // imageUrl="https://picsum.photos/1200/600"
         imageAlt="Hero image"
         align="center"
       />

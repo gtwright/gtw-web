@@ -44,3 +44,5 @@ next-env.d.ts
 /media
 
 /supabase
+# ignore node_modules at any depth (was anchored to root)
+node_modules/
